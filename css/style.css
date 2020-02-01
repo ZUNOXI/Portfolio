@@ -456,7 +456,7 @@ header {
     background-repeat: no-repeat;
     background-position: center center;
     height: calc(100vh);
-    min-height: 700px;
+    min-height: 600px;
     position: relative; }
     .owl-carousel.home-slider .slider-item:before, .owl-carousel.home-slider-loop-false .slider-item:before {
       position: absolute;
@@ -587,7 +587,8 @@ header {
       text-decoration: none; }
 
 .slider-wrap {
-  position: relative; }
+  position: relative;
+ }
   .slider-wrap:after {
     content: "";
     width: 100%;
