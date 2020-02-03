@@ -1,6 +1,6 @@
-Thanks for downloading this theme!
+# ZUNOXI Web Portfolio
 
-Theme Name: eBusiness
-Theme URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
-Author: BootstrapMade.com
+html, css, bootstrap, javascript, jquery
+
+Theme Author: BootstrapMade.com
 Author URL: https://bootstrapmade.com
