@@ -1,228 +1,233 @@
- AOS.init({
-  duration: 800,
-  easing: 'slide-up',
-  once: true
- });
-
 (function($) {
+  "use strict";
 
-	'use strict';
-
-	// bootstrap dropdown hover
-
-  // loader
-  var loader = function() {
-    setTimeout(function() { 
-      if($('#loader').length > 0) {
-        $('#loader').removeClass('show');
-      }
-    }, 1);
-  };
-  loader();
-
-	
-	$('nav .dropdown').hover(function(){
-		var $this = $(this);
-		$this.addClass('show');
-		$this.find('> a').attr('aria-expanded', true);
-		$this.find('.dropdown-menu').addClass('show');
-	}, function(){
-		var $this = $(this);
-			$this.removeClass('show');
-			$this.find('> a').attr('aria-expanded', false);
-			$this.find('.dropdown-menu').removeClass('show');
-	});
-
-
-	$('#dropdown04').on('show.bs.dropdown', function () {
-	  console.log('show');
-	});
-
-  $('.navbar .dropdown > a').click(function(){
-    location.href = this.href;
+  /*--------------------------
+  preloader
+  ---------------------------- */
+  $(window).on('load', function() {
+    var pre_loader = $('#preloader');
+    pre_loader.fadeOut('slow', function() {
+      $(this).remove();
+    });
   });
 
-
-	// home slider
-	$('.home-slider').owlCarousel({
-    loop:true,
-    autoplay: true,
-    margin:0,
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
-    smartSpeed: 1000,
-    nav:true,
-    autoplayHoverPause: true,
-    items: 1,
-    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
-    responsive:{
-      0:{
-        items:1,
-        nav:false
-      },
-      600:{
-        items:1,
-        nav:false
-      },
-      1000:{
-        items:1,
-        nav:true
-      }
-    }
-	});
-
-  $('.home-slider-loop-false').owlCarousel({
-    loop:false,
-    autoplay: true,
-    margin:0,
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
-    nav:true,
-    autoplayHoverPause: true,
-    items: 1,
-    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
-    responsive:{
-      0:{
-        items:1,
-        nav:false
-      },
-      600:{
-        items:1,
-        nav:false
-      },
-      1000:{
-        items:1,
-        nav:true
-      }
+  /*---------------------
+   TOP Menu Stick
+  --------------------- */
+  var s = $("#sticker");
+  var pos = s.position();
+  $(window).on('scroll', function() {
+    var windowpos = $(window).scrollTop() > 300;
+    if (windowpos > pos.top) {
+      s.addClass("stick");
+    } else {
+      s.removeClass("stick");
     }
   });
 
-	// owl carousel
-	var majorCarousel = $('.js-carousel-1');
-	majorCarousel.owlCarousel({
-    loop:true,
-    autoplay: true,
-    stagePadding: 7,
-    margin: 20,
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
-    smartSpeed: 1000,
-    nav: true,
-    autoplayHoverPause: true,
-    items: 3,
-    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
-    responsive:{
-      0:{
-        items:1,
-        nav:false
-      },
-      600:{
-        items:2,
-        nav:false
-      },
-      1000:{
-        items:3,
-        nav:true,
-        loop:false
-      }
-  	}
-	});
+  /*----------------------------
+   Navbar nav
+  ------------------------------ */
+  var main_menu = $(".main-menu ul.navbar-nav li ");
+  main_menu.on('click', function() {
+    main_menu.removeClass("active");
+    $(this).addClass("active");
+  });
 
-	// owl carousel
-	var major2Carousel = $('.js-carousel-2');
-	major2Carousel.owlCarousel({
-    loop:true,
-    autoplay: true,
-    stagePadding: 7,
-    margin: 20,
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
-    nav: true,
-    autoplayHoverPause: true,
-    items: 4,
-    navText : ["<span class='ion-chevron-left'></span>","<span class='ion-chevron-right'></span>"],
-    responsive:{
-      0:{
-        items:1,
-        nav:false
-      },
-      600:{
-        items:3,
-        nav:false
-      },
-      1000:{
-        items:4,
-        nav:true,
-        loop:false
-      }
-  	}
-	});
+  /*----------------------------
+   wow js active
+  ------------------------------ */
+  new WOW().init();
 
+  $(".navbar-collapse a").on('click', function() {
+    $(".navbar-collapse.collapse").removeClass('in');
+  });
 
-  $('.centernonloop').owlCarousel({
-    center: true,
-    items: 1,
-    loop: false,
-    margin: 30,
-    smartSpeed: 1000,
-    dots: true,
-    responsive:{
-      600:{
-        items: 2
-      },
-      900:{
-        items: 3
-      }
+  //---------------------------------------------
+  //Nivo slider
+  //---------------------------------------------
+  $('#ensign-nivoslider').nivoSlider({
+    effect: 'random',
+    slices: 15,
+    boxCols: 12,
+    boxRows: 8,
+    animSpeed: 500,
+    pauseTime: 5000,
+    startSlide: 0,
+    directionNav: true,
+    controlNavThumbs: false,
+    pauseOnHover: true,
+    manualAdvance: false,
+  });
+
+  /*----------------------------
+   Scrollspy js
+  ------------------------------ */
+  var Body = $('body');
+  Body.scrollspy({
+    target: '.navbar-collapse',
+    offset: 80
+  });
+
+  /*---------------------
+    Venobox
+  --------------------- */
+  var veno_box = $('.venobox');
+  veno_box.venobox();
+
+  /*----------------------------
+  Page Scroll
+  ------------------------------ */
+  var page_scroll = $('a.page-scroll');
+  page_scroll.on('click', function(event) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+      scrollTop: $($anchor.attr('href')).offset().top - 55
+    }, 1500, 'easeInOutExpo');
+    event.preventDefault();
+  });
+
+  /*--------------------------
+    Back to top button
+  ---------------------------- */
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('.back-to-top').fadeIn('slow');
+    } else {
+      $('.back-to-top').fadeOut('slow');
     }
   });
 
-  $('.centernonloop2').owlCarousel({
-    items: 1,
+  $('.back-to-top').click(function(){
+    $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
+    return false;
+  });
+
+  /*----------------------------
+   Parallax
+  ------------------------------ */
+  var well_lax = $('.wellcome-area');
+  well_lax.parallax("50%", 0.4);
+  var well_text = $('.wellcome-text');
+  well_text.parallax("50%", 0.6);
+
+  /*--------------------------
+   collapse
+  ---------------------------- */
+  var panel_test = $('.panel-heading a');
+  panel_test.on('click', function() {
+    panel_test.removeClass('active');
+    $(this).addClass('active');
+  });
+
+  /*---------------------
+   Testimonial carousel
+  ---------------------*/
+  var test_carousel = $('.testimonial-carousel');
+  test_carousel.owlCarousel({
     loop: true,
-    margin: 0,
-    autoplay: true,
-    smartSpeed: 1000,
+    nav: false,
     dots: true,
+    autoplay: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      768: {
+        items: 1
+      },
+      1000: {
+        items: 1
+      }
+    }
   });
+  /*----------------------------
+   isotope active
+  ------------------------------ */
+  // portfolio start
+  $(window).on("load", function() {
+    var $container = $('.awesome-project-content');
+    $container.isotope({
+      filter: '*',
+      animationOptions: {
+        duration: 750,
+        easing: 'linear',
+        queue: false
+      }
+    });
+    var pro_menu = $('.project-menu li a');
+    pro_menu.on("click", function() {
+      var pro_menu_active = $('.project-menu li a.active');
+      pro_menu_active.removeClass('active');
+      $(this).addClass('active');
+      var selector = $(this).attr('data-filter');
+      $container.isotope({
+        filter: selector,
+        animationOptions: {
+          duration: 750,
+          easing: 'linear',
+          queue: false
+        }
+      });
+      return false;
+    });
 
+  });
+  //portfolio end
 
+  /*---------------------
+   Circular Bars - Knob
+--------------------- */
+  if (typeof($.fn.knob) != 'undefined') {
+    var knob_tex = $('.knob');
+    knob_tex.each(function() {
+      var $this = $(this),
+        knobVal = $this.attr('data-rel');
 
-	var contentWayPoint = function() {
-		var i = 0;
-		$('.element-animate').waypoint( function( direction ) {
+      $this.knob({
+        'draw': function() {
+          $(this.i).val(this.cv + '%')
+        }
+      });
 
-			if( direction === 'down' && !$(this.element).hasClass('element-animated') ) {
-				
-				i++;
+      $this.appear(function() {
+        $({
+          value: 0
+        }).animate({
+          value: knobVal
+        }, {
+          duration: 2000,
+          easing: 'swing',
+          step: function() {
+            $this.val(Math.ceil(this.value)).trigger('change');
+          }
+        });
+      }, {
+        accX: 0,
+        accY: -150
+      });
+    });
+  }
 
-				$(this.element).addClass('item-animate');
-				setTimeout(function(){
+  /*---------------------
+     Google Maps
+  --------------------- */
+  var get_latitude = $('#google-map').data('latitude');
+  var get_longitude = $('#google-map').data('longitude');
 
-					$('body .element-animate.item-animate').each(function(k){
-						var el = $(this);
-						setTimeout( function () {
-							var effect = el.data('animate-effect');
-							if ( effect === 'fadeIn') {
-								el.addClass('fadeIn element-animated');
-							} else if ( effect === 'fadeInLeft') {
-								el.addClass('fadeInLeft element-animated');
-							} else if ( effect === 'fadeInRight') {
-								el.addClass('fadeInRight element-animated');
-							} else {
-								el.addClass('fadeInUp element-animated');
-							}
-							el.removeClass('item-animate');
-						},  k * 100);
-					});
-					
-				}, 100);
-				
-			}
-
-		} , { offset: '95%' } );
-	};
-	contentWayPoint();
-
-
+  function initialize_google_map() {
+    var myLatlng = new google.maps.LatLng(get_latitude, get_longitude);
+    var mapOptions = {
+      zoom: 14,
+      scrollwheel: false,
+      center: myLatlng
+    };
+    var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map
+    });
+  }
+  google.maps.event.addDomListener(window, 'load', initialize_google_map);
 
 })(jQuery);
