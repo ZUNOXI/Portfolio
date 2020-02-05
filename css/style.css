@@ -1154,6 +1154,7 @@ div#preloader {
   opacity: 0;
   overflow: hidden;
   padding: 10px 15px;
+  margin-bottom: 10%;
   position: absolute;
   transition: all 0.4s ease 0s;
   width: 100%;
