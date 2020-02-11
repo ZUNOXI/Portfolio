@@ -197,7 +197,7 @@
         }).animate({
           value: knobVal
         }, {
-          duration: 2000,
+          duration: 1000,
           easing: 'swing',
           step: function() {
             $this.val(Math.ceil(this.value)).trigger('change');
