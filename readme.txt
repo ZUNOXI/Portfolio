@@ -10,3 +10,5 @@ Theme Author: BootstrapMade.com
 Author URL: https://bootstrapmade.com
 
 i will make it by personal webserver
+
+현재 vue를 적용하여 개인서버에 띄울 예정
